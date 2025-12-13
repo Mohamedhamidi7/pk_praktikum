@@ -1,30 +1,30 @@
 package lkarten;
 
 public class Main {
-	public static void test() {
-		
-	}
 	public static void main(String[] args) {
 		Lernkartei lernkartei = new Lernkartei();
-		Lernkarte karte1 = new Lernkarte("A","1","1","1");
-		Lernkarte karte2 = new Lernkarte("B","2","2","2");
-		Lernkarte karte3 = new Lernkarte("B","3","3","3");
+		
+		MehrfachantwortKarte karte1 = new MehrfachantwortKarte("A","titel","frage",new String[]{"1","2","3"},new int[]{1,2});
+		MehrfachantwortKarte karte2 = new MehrfachantwortKarte("A","titel2","frage2",new String[]{"1","2","3"},new int[]{1,2});
+		EinzelantwortKarte karte3 = new EinzelantwortKarte("A","titel3","frage3","antwort3");
+		EinzelantwortKarte karte4 = new EinzelantwortKarte("B","titel4","frage4","antwort4");
+
 		lernkartei.hinzufuegen(karte1);
 		lernkartei.hinzufuegen(karte2);
 		lernkartei.hinzufuegen(karte3);
-		lernkartei.druckeAlleKarten();
-		System.out.println("=====================================================");
-		for(int i=0;i<lernkartei.gibKartenZuKategorie("B").length;i++) {
-			if(lernkartei.gibKartenZuKategorie("B")[i] !=null){
-						lernkartei.gibKartenZuKategorie("B")[i].druckeKarte();
-			}
-			
-		}
+		lernkartei.hinzufuegen(karte4);
 		
-		for(int i=0;i<lernkartei.erzeugeDeck(3).length;i++) {
-			
-			
-		}
+		lernkartei.druckeAlleKarten();
+		System.out.println("============================================");
+		int anzahlKarten = lernkartei.gibAnzahlKarten();
+		System.out.println(anzahlKarten);
+		System.out.println("============================================");
+		Lernkarte[] deck = lernkartei.erzeugeDeck(3);
+		for(Lernkarte e : deck) e.druckeKarte();
+		System.out.println("============================================");
+		Lernkarte[] kategorie = lernkartei.gibKartenZuKategorie("A");
+		for(Lernkarte e : kategorie) if(e!=null) e.druckeKarte();
+		
+		
 	}
-
 }
