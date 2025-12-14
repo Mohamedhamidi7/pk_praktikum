@@ -29,6 +29,10 @@ public class EinzelantwortKarte extends Lernkarte {
 		super(kategorie, titel, frage);
 		this.antwort = antwort;
 	}
+	public void validiere() throws UngueltigeKarteExeption {
+		super.validiere();
+		if(antwort == null || antwort.isBlank()) throw new UngueltigeKarteExeption("Das Feld darf nicht leer sein.");
+	}
 	@Override
 	public void zeigeRueckseite() {
 		System.out.println("	" + antwort);

@@ -2,7 +2,7 @@ package lkarten;
 
 import java.util.Objects;
 
-public abstract class Lernkarte implements Comparable<Lernkarte> {
+public abstract class Lernkarte implements Comparable<Lernkarte>, ValidierbareKarte {
 	private static int currId = 0;
 	private int id;
 	private String kategorie;
@@ -49,7 +49,11 @@ public abstract class Lernkarte implements Comparable<Lernkarte> {
 	}
 
 
-
+	public void validiere() throws UngueltigeKarteExeption {
+		if(kategorie == null ||titel == null || frage == null || kategorie.isBlank() ||titel.isBlank()|| frage.isBlank() )
+			throw new UngueltigeKarteExeption("Das Feld darf nicht leer sein.");
+	}
+	
 	public void zeigeVorderseite() {
 		System.out.println("[" + id + ", " + kategorie + "] " + titel + ": " + frage);
 	}

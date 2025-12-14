@@ -1,6 +1,7 @@
 package lkarten;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import javax.swing.*;
 public class Menu {
@@ -18,8 +19,16 @@ public class Menu {
 					+ " 5. Beenden\n"
 					+ " Bitte Aktion wählen:"
 			);
-			
-			switch(scn.nextInt()) {
+			int wahl ;
+			try {
+				wahl = scn.nextInt();
+				scn.nextLine();
+			}catch(InputMismatchException e) {
+				System.err.println("Bitte wählen Sie eine Nummer aus der Liste.");
+				scn.nextLine();
+				continue;
+			}
+			switch(wahl) {
 				case 1:
 					Lernkarte[] deck = lernkartei.erzeugeDeck(5);
 					for(Lernkarte e :  deck) {
@@ -52,7 +61,7 @@ public class Menu {
 				case 5:
 					return;
 				default:
-					System.err.println("Unbekante taste!");
+					System.err.println("Bitte wählen eins von 1 bis 5");
 					continue;
 			}
 			

@@ -8,6 +8,7 @@ public class Main {
 		MehrfachantwortKarte karte2 = new MehrfachantwortKarte("A","titel2","frage2",new String[]{"1","2","3"},new int[]{1,2});
 		EinzelantwortKarte karte3 = new EinzelantwortKarte("A","titel3","frage3","antwort3");
 		EinzelantwortKarte karte4 = new EinzelantwortKarte("B","titel4","frage4","antwort4");
+//		EinzelantwortKarte karte5 = new EinzelantwortKarte(null,"titel4","frage4","antwort4");
 
 		menu.lernkartei.hinzufuegen(karte1);
 		menu.lernkartei.hinzufuegen(karte2);

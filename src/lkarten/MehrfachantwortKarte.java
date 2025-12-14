@@ -17,7 +17,11 @@ public class MehrfachantwortKarte extends Lernkarte{
 		return result;
 	}
 
-
+	public void validiere() throws UngueltigeKarteExeption {
+		super.validiere();
+		if(moeglicheAntworten.length>1 && moeglicheAntworten[0] == null || moeglicheAntworten[0].isBlank() && moeglicheAntworten[1] == null || moeglicheAntworten[1].isBlank() )
+			throw new UngueltigeKarteExeption("Das Feld darf nicht leer sein.");
+	}
 
 	@Override
 	public boolean equals(Object obj) {

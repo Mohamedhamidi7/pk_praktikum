@@ -1,11 +1,17 @@
 package lkarten;
 
 import java.util.*;
+import javax.swing.*;
 
 public class Lernkartei {
 	Set<Lernkarte> lernkarten = new HashSet<>();
 	
 	public void hinzufuegen(Lernkarte karte) {
+		try{
+			karte.validiere();
+		} catch(UngueltigeKarteExeption e) {
+			JOptionPane.showMessageDialog(null, "kein gültige Antwort angegeben");
+		}
 		lernkarten.add(karte);
 	}
 	
