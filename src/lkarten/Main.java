@@ -14,17 +14,6 @@ public class Main {
 		menu.lernkartei.hinzufuegen(karte3);
 		menu.lernkartei.hinzufuegen(karte4);
 		
-//		lernkartei.druckeAlleKarten();
-//		System.out.println("============================================");
-//		int anzahlKarten = lernkartei.gibAnzahlKarten();
-//		System.out.println(anzahlKarten);
-//		System.out.println("============================================");
-//		Lernkarte[] deck = lernkartei.erzeugeDeck(3);
-//		for(Lernkarte e : deck) e.druckeKarte();
-//		System.out.println("============================================");
-//		Lernkarte[] kategorie = lernkartei.gibKartenZuKategorie("A");
-//		for(Lernkarte e : kategorie) if(e!=null) e.druckeKarte();
-		
 		menu.start();
 	}
 }

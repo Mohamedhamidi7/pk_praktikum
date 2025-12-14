@@ -1,20 +1,19 @@
 package lkarten;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 public class Lernkartei {
-	LinkedList<Lernkarte> lernkarten = new LinkedList<>();
-	
-
+	Set<Lernkarte> lernkarten = new HashSet<>();
 	
 	public void hinzufuegen(Lernkarte karte) {
 		lernkarten.add(karte);
 	}
 	
 	public void druckeAlleKarten() {
-		Iterator<Lernkarte> it = lernkarten.iterator();
+		ArrayList<Lernkarte> lernkartenAsList = new ArrayList<>(lernkarten);
+		Collections.sort(lernkartenAsList);
+		
+		Iterator<Lernkarte> it = lernkartenAsList.iterator();
 		while(it.hasNext()) {
 			it.next().druckeKarte();
 		}
@@ -40,12 +39,12 @@ public class Lernkartei {
 		    if (lernkarten.isEmpty()) {
 		        throw new IllegalStateException("Keine Lernkarten vorhanden!");
 		    }
-
+		    LinkedList<Lernkarte> lernkartenAsList = new LinkedList<>(lernkarten);
 		    Lernkarte[] result = new Lernkarte[anzahlKarten];
 		    Random rnd = new Random();
 
 		    for (int i = 0; i < result.length; i++) {
-		        result[i] = lernkarten.get(rnd.nextInt(lernkarten.size()));
+		        result[i] = lernkartenAsList.get(rnd.nextInt(lernkarten.size()));
 		    }
 		    return result;
 
