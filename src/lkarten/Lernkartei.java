@@ -2,6 +2,14 @@ package lkarten;
 
 import java.util.*;
 import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 
 public class Lernkartei {
 	Set<Lernkarte> lernkarten = new HashSet<>();
@@ -55,5 +63,40 @@ public class Lernkartei {
 		    return result;
 
 	}
+		
+		public void exportiereEintraegeAlsCsvNio(Path datei) throws java.io.IOException {
+		    String header = "ID,Kategorie,Titel,Frage,Antwort(en),Richtige Antwort(en)";
+
+		    ArrayList<Lernkarte> list = new ArrayList<>(lernkarten);
+		    Collections.sort(list);
+
+		    ArrayList<String> lines = new ArrayList<>();
+		    lines.add(header);
+		    for (Lernkarte k : list) {
+		        lines.add(k.exportiereAlsCsv());
+		    }
+
+		    Files.write(datei, lines, StandardCharsets.UTF_8,
+		            StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+		}
+		public void exportiereEintraegeAlsCsv(Path datei) throws java.io.IOException {
+		    String header = "ID,Kategorie,Titel,Frage,Antwort(en),Richtige Antwort(en)";
+
+		    ArrayList<Lernkarte> list = new ArrayList<>(lernkarten);
+		    Collections.sort(list);
+
+		    try (BufferedWriter writer = new BufferedWriter(
+		            new OutputStreamWriter(new FileOutputStream(datei.toFile()), StandardCharsets.UTF_8)
+		    )) {
+		        writer.write(header);
+		        writer.newLine();
+
+		        for (Lernkarte k : list) {
+		            writer.write(k.exportiereAlsCsv());
+		            writer.newLine();
+		        }
+		    }
+		}
+
 
 }

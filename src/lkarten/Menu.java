@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import javax.swing.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class Menu {
 	Lernkartei lernkartei = new Lernkartei();
 	
@@ -11,14 +14,16 @@ public class Menu {
 	public void start() {
 		while(true) {
 			System.out.println(
-					"Lernkarten-App\n"
-					+ " 1. Lernen!\n"
-					+ " 2. Einzelantwortkarte hinzufügen\n"
-					+ " 3. Drucke alle Karten\n"
-					+ " 4. Drucke Karten zu Kategorie\n"
-					+ " 5. Beenden\n"
-					+ " Bitte Aktion wählen:"
+			        "Lernkarten-App\n"
+			        + " 1. Lernen!\n"
+			        + " 2. Einzelantwortkarte hinzufügen\n"
+			        + " 3. Drucke alle Karten\n"
+			        + " 4. Drucke Karten zu Kategorie\n"
+			        + " 5. CSV-Export\n"
+			        + " 6. Beenden\n"
+			        + " Bitte Aktion wählen:"
 			);
+
 			int wahl ;
 			try {
 				wahl = scn.nextInt();
@@ -59,9 +64,44 @@ public class Menu {
 					for(Lernkarte e : lernkartei.gibKartenZuKategorie(kategorieEingabe)) if(e!=null) e.druckeKarte();
 					break;
 				case 5:
-					return;
+				    while (true) {
+				        String dateiname = JOptionPane.showInputDialog(null, "Dateiname für CSV-Export:");
+
+				        if (dateiname == null) { // cancel
+				            break;
+				        }
+
+				        if (dateiname.isBlank()) {
+				            JOptionPane.showMessageDialog(null, "Dateiname darf nicht leer sein.");
+				            continue;
+				        }
+
+				        Path pfad = Path.of(dateiname);
+
+				        if (Files.exists(pfad)) {
+				            int res = JOptionPane.showConfirmDialog(
+				                    null,
+				                    "Datei existiert bereits. Überschreiben?",
+				                    "Bestätigung",
+				                    JOptionPane.YES_NO_OPTION
+				            );
+				            if (res != JOptionPane.YES_OPTION) {
+				                continue;
+				            }
+				        }
+
+				        try {
+				            lernkartei.exportiereEintraegeAlsCsv(pfad);
+				        } catch (Exception ex) {
+				            JOptionPane.showMessageDialog(null, "Fehler beim Export: " + ex.getMessage());
+				        }
+				        break;
+				    }
+				    break;
+				case 6:
+				    return;
 				default:
-					System.err.println("Bitte wählen eins von 1 bis 5");
+					System.err.println("Bitte wählen eins von 1 bis 6");
 					continue;
 			}
 			

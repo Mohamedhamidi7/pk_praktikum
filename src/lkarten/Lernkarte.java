@@ -2,13 +2,26 @@ package lkarten;
 
 import java.util.Objects;
 
-public abstract class Lernkarte implements Comparable<Lernkarte>, ValidierbareKarte {
+public abstract class Lernkarte implements Comparable<Lernkarte>, ValidierbareKarte, CsvExportable {
 	private static int currId = 0;
 	private int id;
 	private String kategorie;
 	private String titel;
 	private String frage;
 	//private String antwort;
+	
+	public int getId() {
+	    return id;
+	}
+
+	public String getTitel() {
+	    return titel;
+	}
+
+	public String getFrage() {
+	    return frage;
+	}
+
 	
 	@Override
 	public int hashCode() {

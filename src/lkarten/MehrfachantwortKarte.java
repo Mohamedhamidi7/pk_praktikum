@@ -24,6 +24,15 @@ public class MehrfachantwortKarte extends Lernkarte{
 	}
 
 	@Override
+	public String exportiereAlsCsv() {
+	    String moegl = Arrays.toString(moeglicheAntworten);
+	    String richtig = Arrays.toString(richtigeAntworten);
+
+	    return getId() + "," + getKategorie() + "," + getTitel() + "," + getFrage() + "," + moegl + "," + richtig;
+	}
+
+	
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

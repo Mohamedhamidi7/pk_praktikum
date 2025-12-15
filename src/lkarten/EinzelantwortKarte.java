@@ -33,6 +33,13 @@ public class EinzelantwortKarte extends Lernkarte {
 		super.validiere();
 		if(antwort == null || antwort.isBlank()) throw new UngueltigeKarteExeption("Das Feld darf nicht leer sein.");
 	}
+	
+	@Override
+	public String exportiereAlsCsv() {
+	    return getId() + "," + getKategorie() + "," + getTitel() + "," + getFrage() + "," + antwort + ",";
+	}
+
+	
 	@Override
 	public void zeigeRueckseite() {
 		System.out.println("	" + antwort);
